@@ -1,32 +1,32 @@
 import { NavLink } from 'react-router-dom'
 
 const Header = () => {
-    return (
-        <header>
-            <nav>
-                <ul>
-                    <li>
-                        <NavLink id="home" class="left-floated" to="/">MoneyGone</NavLink>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <NavLink class="right-floated" to="/register">Register</NavLink>
-                    </li>
-                    <li>
-                        <NavLink class="right-floated" to="/login">Login</NavLink>
-                    </li>
-                    <li>
-                        <NavLink class="right-floated" to="/profile">[myusername profile]</NavLink>
-                    </li>
+   return (
+      <header>
+         <nav>
+            <ul>
+               <li>
+                  <NavLink id="home" className="left-floated" to="/">MoneySafe</NavLink>
+               </li>
+            </ul>
+            <ul>
+               <li>
+                  <NavLink className="right-floated" to="/register">Register</NavLink>
+               </li>
+               <li>
+                  <NavLink className="right-floated" to="/login">Login</NavLink>
+               </li>
+               <li>
+                  <NavLink className="right-floated" to="/profile">[myusername profile]</NavLink>
+               </li>
 
-                    <li>
-                        <NavLink class="right-floated" to="/">Logout</NavLink>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-    );
+               <li>
+                  <NavLink className="right-floated" to="/">Logout</NavLink>
+               </li>
+            </ul>
+         </nav>
+      </header>
+   );
 };
 
 export default Header;

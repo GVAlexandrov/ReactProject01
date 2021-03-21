@@ -1,16 +1,16 @@
 
-const NewExpenditure = () => {
+const NewExpense = () => {
     return (
         <main>
             <form>
-                <h1>Expense</h1>
+                <h1>New Expense</h1>
 
-                <div class="form-control">
+                <div className="form-control">
                     <label for="merchant">Merchant*</label>
                     <input id="merchant" type="text" placeholder="Shoes" />
                 </div>
 
-                <div class="form-control">
+                <div className="form-control">
                     <label for="total">Total*</label>
                     <input id="total" type="text" placeholder="123.00" />
                     <select name="vault" id="vault">
@@ -18,7 +18,7 @@ const NewExpenditure = () => {
                     </select>
                 </div>
 
-                <div class="form-control">
+                <div className="form-control">
                     <label for="category">Category*</label>
                     <select name="category" id="category">
                         <option disabled selected value="default">Select category...</option>
@@ -44,12 +44,12 @@ const NewExpenditure = () => {
                     </select>
                 </div>
 
-                <div class="form-control">
+                <div className="form-control">
                     <label for="description">Description*</label>
                     <input id="description" type="text" placeholder="Shoes description..." />
                 </div>
 
-                <div class="form-control">
+                <div className="form-control">
                     <label for="report">Report: </label>
                     <input type="checkbox" id="report" />
                 </div>
@@ -61,4 +61,4 @@ const NewExpenditure = () => {
     );
 };
 
-export default NewExpenditure;
+export default NewExpense;

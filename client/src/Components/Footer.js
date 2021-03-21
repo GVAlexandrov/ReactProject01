@@ -4,8 +4,8 @@ const Footer = () => {
     return (
         <footer>
             <NavLink to="/"> &uarr; Back to top &uarr;</NavLink>
-            <img src="https://softuni.bg/Content/images/about-page/softuni.png" alt="" />
-            <p>Software University - JavaScript Back-End February 2021</p>
+            <img src="https://www.iconninja.com/files/521/347/770/euro-currency-symbol-icon.png" alt="" />
+            <p>GVA Finance 2021</p>
             <p>@All Rights Reserved &copy;</p>
         </footer>
     );

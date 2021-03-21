@@ -1,9 +1,10 @@
+import { NavLink } from 'react-router-dom'
 
 const Home = () => {
     return (
         <main>
-            <p class="guest-message">MoneyGone? The best expense tracker tool of all time! </p>
-            <p class="guest-message">Аre you new here? <a href="#">Register</a> yourself!</p>
+            <p className="guest-message">MoneySafe? The best expense tracker tool of all time! </p>
+            <p className="guest-message">Аre you new here? <NavLink to="/register">Register</NavLink> yourself!</p>
         </main>
     );
 };
