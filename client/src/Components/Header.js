@@ -21,6 +21,10 @@ const Header = () => {
                </li>
 
                <li>
+                  <NavLink className="right-floated" to="/expenses">My Expenses</NavLink>
+               </li>
+
+               <li>
                   <NavLink className="right-floated" to="/">Logout</NavLink>
                </li>
             </ul>

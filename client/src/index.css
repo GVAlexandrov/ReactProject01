@@ -2,8 +2,9 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Grenze', serif;
-    font-size: 24px;
+    /* font-family: 'Grenze', serif; */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 22px;
 }
 
 body {
@@ -159,6 +160,13 @@ form div.form-control {
     display: block;
 }
 
+div.select-category {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1%;
+    display: block;
+}
+
 form div.form-control label {
     float: left;
     width: 30%;
@@ -240,16 +248,16 @@ table th {
 
 table td {
     text-align: center;
-    padding: 1%;
+    line-height: 20px;
+    /* padding: 0%; */
 }
 
 table tbody tr {
-    opacity: 0.5;
     filter: alpha(opacity=50);
 }
 
 table tbody tr:hover {
-    opacity: 1;
+    color: red;
 }
 
 section.actions {
@@ -281,7 +289,7 @@ hr.separator {
     margin-bottom: 2%;
 }
 
-section.actions h2 {
+section.actions h2, h3 {
     color: #ffa000;
 }
 
