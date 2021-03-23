@@ -30,13 +30,15 @@ class Expenses extends Component {
                         <input type="text" id="refill-amount" />
                         <button type="submit">Refill</button>
                     </form>
+
                     <div>
                         <h3>New expense</h3>
-                        <NavLink to="/new-expense">Add it now</NavLink>
+                        <NavLink to="/new-expense">Add</NavLink>
                     </div>
                 </section>
 
                 <hr className="separator" />
+                
                 <div className="select-category">
                     <select name="category" id="category">
                         <option disabled selected value="default">Select category...</option>
@@ -93,7 +95,7 @@ class Expenses extends Component {
 
 
 
-                <h1 className="no-expenses">No expenses founded so far.. <span>GOOD JOB!</span></h1>
+                <h1 className="no-expenses">No expenses so far...</h1>
 
             </main>
         );

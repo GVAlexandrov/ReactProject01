@@ -7,14 +7,16 @@ const NewExpense = () => {
 
                 <div className="form-control">
                     <label for="merchant">Merchant*</label>
-                    <input id="merchant" type="text" placeholder="Shoes" />
+                    <input id="merchant" type="text" placeholder="Merchant" />
                 </div>
 
                 <div className="form-control">
                     <label for="total">Total*</label>
-                    <input id="total" type="text" placeholder="123.00" />
+                    <input id="total" type="text" placeholder="52.00" />
                     <select name="vault" id="vault">
-                        <option value="bgn">BGN лв</option>
+                        <option value="bgn">BGN</option>
+                        <option value="eur">EUR</option>
+                        <option value="usd">USD</option>
                     </select>
                 </div>
 
@@ -46,7 +48,7 @@ const NewExpense = () => {
 
                 <div className="form-control">
                     <label for="description">Description*</label>
-                    <input id="description" type="text" placeholder="Shoes description..." />
+                    <input id="description" type="text" placeholder="Expense description..." />
                 </div>
 
                 <div className="form-control">
