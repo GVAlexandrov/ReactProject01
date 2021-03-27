@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import ExistingExpense from './ExistingExpense';
 
+
 class Expenses extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +12,7 @@ class Expenses extends Component {
     }
   }
 
+
   componentDidMount() {
     fetch('http://localhost:5000/expenses')
       .then(res => res.json())
@@ -18,31 +20,37 @@ class Expenses extends Component {
       .catch(error => console.log(error));
   }
 
+
   render() {
     console.log(this.state.expenses);
 
+
     return (
       <main>
-
         <section className="actions">
           <form action="">
             <h3>Refill account amount.</h3>
+
             <input type="text" id="refill-amount" />
+
             <button type="submit">Refill</button>
           </form>
 
+
           <div>
             <h3>New expense</h3>
+
             <NavLink to="/new-expense">Add</NavLink>
           </div>
         </section>
 
+
         <hr className="separator" />
 
-        <div className="select-category">
-          <select name="category" id="category">
 
-            <option disabled selected value="default">Select category...</option>
+        <div className="select-category">
+          <select className="category" id="category">
+            {/* <option disabled selected value="default">Select category...</option> */}
             <option value="all">All</option>
             <option value="car">Car</option>
             <option value="fees">Fees</option>
@@ -57,6 +65,7 @@ class Expenses extends Component {
           </select>
         </div>
 
+
         <table className="expenses">
           <thead>
             <tr>
@@ -67,10 +76,11 @@ class Expenses extends Component {
               <th>Edit</th>
             </tr>
 
+
           </thead>
 
-          <tbody>
 
+          <tbody>
             {this.state.expenses.map(x =>
               <ExistingExpense
                 key={x.id}
@@ -80,16 +90,11 @@ class Expenses extends Component {
                 category={x.category}
                 description={x.description} />
             )}
-
           </tbody>
-
-
         </table>
 
 
-
         <h1 className="no-expenses">No expenses so far...</h1>
-
       </main>
     );
   }

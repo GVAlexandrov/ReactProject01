@@ -1,21 +1,35 @@
+import * as expenseService from './services/services';
 
 const NewExpense = () => {
+  let onNewExpenseSubmitHandler = (e) => {
+    e.preventDefault();
+
+    console.log(e.target.merchant.value);    
+
+    let { merchant, price, curency, category, description } = e.target;
+
+    expenseService.addNewExpense(merchant.value, price.value, curency.value, category.value, description.value)
+  }
+
   return (
     <main>
-      <form>
+      <form onSubmit={onNewExpenseSubmitHandler}>
         <h1>New Expense</h1>
 
 
         <div className="form-control">
-          <label for="merchant">Merchant*</label>
-          <input id="merchant" type="text" placeholder="Merchant" />
+          <label htmlFor="merchant">Merchant*</label>
+
+          <input id="merchant" name="merchant" type="text" placeholder="Merchant" />
         </div>
 
 
         <div className="form-control">
-          <label for="total">Total*</label>
-          <input id="total" type="text" placeholder="52.00" />
-          <select name="vault" id="vault">
+          <label htmlFor="total">Total*</label>
+
+          <input id="total" name="price" type="text" placeholder="52.00" />
+
+          <select className="vault" name="curency" id="vault">
             <option value="bgn">BGN</option>
             <option value="eur">EUR</option>
             <option value="usd">USD</option>
@@ -24,13 +38,13 @@ const NewExpense = () => {
 
 
         <div className="form-control">
-          <label for="category">Category*</label>
+          <label htmlFor="category">Category*</label>
 
-          <select name="category" id="category">
-            <option disabled selected value="default">Select category...</option>
+          <select className="category" name="category" id="category">
+            {/* <option disabled selected value="default">Select category...</option> */}
             <option value="all">All</option>
             <option value="car">Car</option>
-            <option value="fees">Fees</option>
+            <option value="clothes">Clothes</option>
             <option value="insurance">Insurance</option>
             <option value="maintenance">Maintenance</option>
             <option value="food">Food</option>
@@ -44,13 +58,15 @@ const NewExpense = () => {
 
 
         <div className="form-control">
-          <label for="description">Description*</label>
-          <input id="description" type="text" placeholder="Expense description..." />
+          <label htmlFor="description">Description*</label>
+
+          <input id="description" name="description" type="text" placeholder="Expense description..." />
         </div>
 
 
         <div className="form-control">
-          <label for="report">Report: </label>
+          <label htmlFor="report">Report: </label>
+
           <input type="checkbox" id="report" />
         </div>
 

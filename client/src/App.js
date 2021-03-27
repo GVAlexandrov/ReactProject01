@@ -1,5 +1,4 @@
 import { Route, Switch } from 'react-router-dom';
-
 import Header from './Components/Header';
 import Home from './Components/Home';
 import Footer from './Components/Footer';
@@ -10,13 +9,14 @@ import Expenses from './Components/Expenses';
 import Profile from './Components/Profile';
 import Report from './Components/Report';
 import Error404 from './Components/404';
-
 import style from './App.module.css';
+
 
 function App() {
   return (
     <div className={style.App}>
       <Header />
+
 
       <Switch>
         <Route path='/' exact component={Home} />
@@ -29,9 +29,11 @@ function App() {
         <Route path='/*' exact component={Error404} />
       </Switch>
 
+
       <Footer />
     </div>
   );
 }
+
 
 export default App;

@@ -6,7 +6,7 @@ const Profile = () => {
             <table className="expenses-info">
                 <thead>
                     <tr>
-                        <th colspan="2">Expenses</th>
+                        <th colSpan="2">Expenses</th>
                     </tr>
                 </thead>
                 <tbody>
