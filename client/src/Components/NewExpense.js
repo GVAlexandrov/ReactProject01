@@ -1,15 +1,25 @@
 import * as expenseService from './services/services';
 
-const NewExpense = () => {
+const NewExpense = ({
+  history,
+}) => {
   let onNewExpenseSubmitHandler = (e) => {
     e.preventDefault();
 
-    console.log(e.target.merchant.value);    
-
     let { merchant, price, curency, category, description } = e.target;
 
-    expenseService.addNewExpense(merchant.value, price.value, curency.value, category.value, description.value)
+    expenseService
+      .addNewExpense(
+        merchant.value,
+        price.value,
+        curency.value,
+        category.value,
+        description.value)
+      .then(() => {
+        history.push('/expenses');
+      })
   }
+
 
   return (
     <main>
@@ -31,8 +41,8 @@ const NewExpense = () => {
 
           <select className="vault" name="curency" id="vault">
             <option value="bgn">BGN</option>
-            <option value="eur">EUR</option>
-            <option value="usd">USD</option>
+            {/* <option value="eur">EUR</option> */}
+            {/* <option value="usd">USD</option> */}
           </select>
         </div>
 
