@@ -1,16 +1,28 @@
+import { login, activeUser } from './services/authService';
+
 
 const Login = () => {
+  const onLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.elements.email.value;
+    const pass = e.target.elements.pass.value;
+
+    login(email, pass)
+      .then(res => activeUser(res.user.uid, res.user.email));
+  }
+
+
   return (
     <main>
-      <form>
+      <form onSubmit={onLogin}>
         <h1>Login</h1>
 
         <p>Personal info</p>
-        <label htmlFor="usernmae">Username</label>
-        <input id="username" type="text" placeholder="JustMyself123..." />
+        <label htmlFor="email">Email</label>
+        <input id="email" type="text" placeholder="JustMyself123..." autoComplete="on" name="email"/>
 
-        <label htmlFor="usernmae">Password</label>
-        <input id="password" type="password" placeholder="********" />
+        <label htmlFor="pass">Password</label>
+        <input id="pass" type="password" placeholder="********" autoComplete="on" name="pass"/>
 
         <button type="submit">Login</button>
       </form>

@@ -8,21 +8,53 @@ class Expenses extends Component {
     super(props);
 
     this.state = {
-      expenses: []
+      expenses: [],
+      expensesCopy: []
     }
+
+    this.filterByCategory = this.filterByCategory.bind(this);
   }
 
 
   componentDidMount() {
-    fetch('http://localhost:5000/expenses')
+    fetch('https://react-project-01-55fc9-default-rtdb.europe-west1.firebasedatabase.app/expenses.json')
       .then(res => res.json())
-      .then(res => this.setState({ expenses: res }))
+      .then(res => {
+        let expensesArr = [];
+        for (const key in res) {
+          if (Object.hasOwnProperty.call(res, key)) {
+            res[key].id = key;
+            expensesArr.push(res[key]);
+          }
+        }
+        this.setState(() => ({
+          expenses: expensesArr,
+          expensesCopy: expensesArr,
+        }))
+
+      }
+      )
       .catch(error => console.log(error));
   }
 
 
+  filterByCategory(e) {
+    if (e.target.value === 'all') {
+      this.setState((state) => ({ ...state, expensesCopy: this.state.expenses }));
+
+      return;
+    };
+
+    let filteredArray = this.state.expenses.filter(element => {
+      return element.category === e.target.value;
+    });
+
+    this.setState((state) => ({ ...state, expensesCopy: filteredArray }));
+  }
+
+
   render() {
-    console.log(this.state.expenses);
+    // console.log(this.state.expenses);
 
 
     return (
@@ -49,7 +81,7 @@ class Expenses extends Component {
 
 
         <div className="select-category">
-          <select className="category" id="category">
+          <select className="category" id="category" onChange={this.filterByCategory}>
             {/* <option disabled selected value="default">Select category...</option> */}
             <option value="all">All</option>
             <option value="car">Car</option>
@@ -73,7 +105,8 @@ class Expenses extends Component {
               <th>Price</th>
               <th>Category</th>
               <th>Description</th>
-              <th>Edit</th>
+              <th>Details</th>
+              <th>Delete</th>
             </tr>
 
 
@@ -81,7 +114,7 @@ class Expenses extends Component {
 
 
           <tbody>
-            {this.state.expenses.map(x =>
+            {this.state.expensesCopy.map(x =>
               <ExistingExpense
                 key={x.id}
                 id={x.id}
@@ -94,7 +127,9 @@ class Expenses extends Component {
         </table>
 
 
-        <h1 className="no-expenses">No expenses so far...</h1>
+        {(this.state.expensesCopy.length === 0)
+          ? <h1 className="no-expenses">No expenses...</h1> : ''
+        }
       </main>
     );
   }

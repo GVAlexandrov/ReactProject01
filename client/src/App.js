@@ -6,6 +6,8 @@ import Register from './Components/Register';
 import Login from './Components/Login';
 import NewExpense from './Components/NewExpense';
 import Expenses from './Components/Expenses';
+import ExpenseDetails from './Components/ExpenseDetails';
+import EditExpense from './Components/EditExpense';
 import Profile from './Components/Profile';
 import Report from './Components/Report';
 import Error404 from './Components/404';
@@ -24,6 +26,8 @@ function App() {
         <Route path='/login' exact component={Login} />
         <Route path='/new-expense' exact component={NewExpense} />
         <Route path='/expenses' exact component={Expenses} />
+        <Route path='/expenses/:id/details' exact component={ExpenseDetails} />
+        <Route path='/expenses/:id/details/edit' exact component={EditExpense} />
         <Route path='/profile' exact component={Profile} />
         <Route path='/report' exact component={Report} />
         <Route path='/*' exact component={Error404} />

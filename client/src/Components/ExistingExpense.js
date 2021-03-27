@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 const ExistingExpense = ({
   id,
@@ -6,6 +7,15 @@ const ExistingExpense = ({
   category,
   description
 }) => {
+
+  const deleteExpenseMessage = () => {
+    if (window.confirm('Are you sure?')) {
+      console.log('Deleted');
+      return;
+    }
+
+    console.log('Not Deleted');
+  }
 
   return (
     <tr id={id}>
@@ -37,7 +47,14 @@ const ExistingExpense = ({
 
       <td>
         <div className="report">
-          <p><a href="#" id={id}>Report</a></p>
+          <p><Link to={`/expenses/${id}/details`} id={id}>Details</Link></p>
+        </div>
+      </td>
+
+
+      <td>
+        <div className="report">
+          <p><Link to="#" id={id} onClick={deleteExpenseMessage}>X</Link></p>
         </div>
       </td>
     </tr>
