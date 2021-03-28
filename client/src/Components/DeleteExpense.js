@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as expenseService from './services/services';
 
-const EditExpense = ({
+const DeleteExpense = ({
   match,
   history
 }) => {
@@ -98,4 +98,4 @@ const EditExpense = ({
   );
 };
 
-export default EditExpense;
+export default DeleteExpense;

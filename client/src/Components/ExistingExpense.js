@@ -54,7 +54,7 @@ const ExistingExpense = ({
 
       <td>
         <div className="report">
-          <p><Link to="#" id={id} onClick={deleteExpenseMessage}>X</Link></p>
+          <p><Link to="/expenses" id={id} onClick={deleteExpenseMessage}>X</Link></p>
         </div>
       </td>
     </tr>
