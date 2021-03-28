@@ -60,3 +60,13 @@ export const editExpense = (merchant, price, curency, category, description, exp
             });
         });
 };
+
+export const deleteExpense = (expenseId) => {
+    return auth.currentUser.getIdToken(false)
+        .then((token) => {            
+            fetch(URL + `expenses/${expenseId}.json?auth=${token}`, {
+                method: 'DELETE',                
+                body: JSON.stringify(editExpense)
+            });
+        });
+};

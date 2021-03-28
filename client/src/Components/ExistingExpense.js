@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import * as expenseService from './services/services';
 
 const ExistingExpense = ({
   id,
@@ -8,10 +9,11 @@ const ExistingExpense = ({
   description
 }) => {
 
-  const deleteExpenseMessage = () => {
+  const deleteExpenseMessage = (e) => {
     if (window.confirm('Are you sure?')) {
-      console.log('Deleted');
-      return;
+      expenseService
+      .deleteExpense(id)
+      .then();
     }
 
     console.log('Not Deleted');

@@ -32,7 +32,6 @@ const ExpenseDetails = ({
             <th>Category</th>
             <th>Description</th>
             <th>Edit</th>
-            <th>Delete</th>
           </tr>
 
 
@@ -67,12 +66,7 @@ const ExpenseDetails = ({
               </div>
             </td>
 
-
-            <td>
-              <div className="report">
-                <p><Link to="#" id={match.params.id}>X</Link></p>
-              </div>
-            </td>
+            
           </tr>
         </tbody>
       </table>
