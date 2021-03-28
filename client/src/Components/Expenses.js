@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom'
+import { URL } from '../config/config';
 import ExistingExpense from './ExistingExpense';
 
 
@@ -17,7 +18,7 @@ class Expenses extends Component {
 
 
   componentDidMount() {
-    fetch('https://react-project-01-55fc9-default-rtdb.europe-west1.firebasedatabase.app/expenses.json')
+    fetch(URL + 'expenses.json')
       .then(res => res.json())
       .then(res => {
         let expensesArr = [];
@@ -55,8 +56,6 @@ class Expenses extends Component {
 
   render() {
     // console.log(this.state.expenses);
-
-
     return (
       <main>
         <section className="actions">

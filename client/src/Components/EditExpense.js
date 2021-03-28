@@ -3,6 +3,7 @@ import * as expenseService from './services/services';
 
 const EditExpense = ({
   match,
+  history
 }) => {
   let [expense, setExpense] = useState({});
 
@@ -20,8 +21,22 @@ const EditExpense = ({
 
   let onEditSubmit = (e) => {
     e.preventDefault();
-    
+
+    let { merchant, price, curency, category, description } = e.target;
+
     // console.log(e.target);
+    expenseService
+      .editExpense(
+        merchant.value,
+        price.value,
+        curency.value,
+        category.value,
+        description.value,
+        match.params.id)
+      .then(res => console.log(res))
+      .then(() => {
+        history.push(`/expenses/${match.params.id}/details`);
+      })
   }
 
 
@@ -56,16 +71,16 @@ const EditExpense = ({
 
           <select className="category" name="category" id="category">
             <option value="all">All</option>
-            <option selected={expense.category==='car'} value="car">Car</option>
-            <option selected={expense.category==='clothes'} value="clothes">Clothes</option>
-            <option selected={expense.category==='insurance'} value="insurance">Insurance</option>
-            <option selected={expense.category==='maintenance'} value="maintenance">Maintenance</option>
-            <option selected={expense.category==='food'} value="food">Food</option>
-            <option selected={expense.category==='rent'} value="rent">Rent</option>
-            <option selected={expense.category==='taxes'} value="taxes">Taxes</option>
-            <option selected={expense.category==='travel'} value="travel">Travel</option>
-            <option selected={expense.category==='utilities'} value="utilities">Utilities</option>
-            <option selected={expense.category==='other'} value="other">Other</option>
+            <option selected={expense.category === 'car'} value="car">Car</option>
+            <option selected={expense.category === 'clothes'} value="clothes">Clothes</option>
+            <option selected={expense.category === 'insurance'} value="insurance">Insurance</option>
+            <option selected={expense.category === 'maintenance'} value="maintenance">Maintenance</option>
+            <option selected={expense.category === 'food'} value="food">Food</option>
+            <option selected={expense.category === 'rent'} value="rent">Rent</option>
+            <option selected={expense.category === 'taxes'} value="taxes">Taxes</option>
+            <option selected={expense.category === 'travel'} value="travel">Travel</option>
+            <option selected={expense.category === 'utilities'} value="utilities">Utilities</option>
+            <option selected={expense.category === 'other'} value="other">Other</option>
           </select>
         </div>
 

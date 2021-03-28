@@ -1,5 +1,6 @@
 import * as expenseService from './services/services';
 
+
 const NewExpense = ({
   history,
 }) => {
@@ -35,14 +36,13 @@ const NewExpense = ({
 
 
         <div className="form-control">
-          <label htmlFor="total">Total*</label>
+          <label htmlFor="total">Price*</label>
 
           <input id="total" name="price" type="text" placeholder="52.00" />
 
           <select className="vault" name="curency" id="vault">
             <option value="bgn">BGN</option>
             {/* <option value="eur">EUR</option> */}
-            {/* <option value="usd">USD</option> */}
           </select>
         </div>
 
@@ -74,17 +74,11 @@ const NewExpense = ({
         </div>
 
 
-        <div className="form-control">
-          <label htmlFor="report">Report: </label>
-
-          <input type="checkbox" id="report" />
-        </div>
-
-
         <button type="Submit">Save</button>
       </form>
     </main>
   );
 };
+
 
 export default NewExpense;
