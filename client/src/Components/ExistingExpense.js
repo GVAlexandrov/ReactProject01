@@ -6,17 +6,22 @@ const ExistingExpense = ({
   expense,
   price,
   category,
-  description
+  description,
+  refresh
 }) => {
 
   const deleteExpenseMessage = (e) => {
     if (window.confirm('Are you sure?')) {
       expenseService
       .deleteExpense(id)
-      .then();
-    }
+      .then(resp => console.log(resp))
+      .then(() => {
+        refresh();
+      });
 
-    console.log('Not Deleted');
+    } else {
+      console.log('Not Deleted');
+    }
   }
 
   return (

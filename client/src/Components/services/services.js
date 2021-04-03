@@ -6,17 +6,20 @@ import { auth } from '../../config/firebaseInit';
 
 
 export const getOne = (expenseId) => {
+    const uid = localStorage.uid;
     console.log(`${URL}expenses/${expenseId}.json`);
 
-    return fetch(`${URL}expenses/${expenseId}.json`)
+    return fetch(`${URL}expenses/${uid}/${expenseId}.json`)
         .then(res => res.json())
         .catch(error => console.log(error));
 }
 
 
 export const addNewExpense = (merchant, price, curency, category, description) => {
+    const uid = localStorage.uid;
+
     let newExpense = {
-        profile: localStorage.getItem('uid'),
+        // profile: localStorage.getItem('uid'),
         expense: merchant,
         category,
         price,
@@ -27,7 +30,7 @@ export const addNewExpense = (merchant, price, curency, category, description) =
 
     return auth.currentUser.getIdToken(false)
         .then((token) => {
-            fetch(URL + `expenses.json?auth=${token}`, {
+            fetch(URL + `expenses/${uid}/.json?auth=${token}`, {
                 method: "POST",
                 body: JSON.stringify(newExpense)
             });
@@ -44,14 +47,15 @@ export const editExpense = (merchant, price, curency, category, description, exp
         description,
     }
 
+    const uid = localStorage.uid;
     // console.log(JSON.stringify(editExpense));
 
     return auth.currentUser.getIdToken(false)
         .then((token) => {
-            console.log(URL + `expenses/${expenseId}.json?auth=${token}`);
+            console.log(URL + `expenses/${uid}/${expenseId}.json?auth=${token}`);
             console.log(editExpense);
 
-            fetch(URL + `expenses/${expenseId}.json?auth=${token}`, {
+            fetch(URL + `expenses/${uid}/${expenseId}.json?auth=${token}`, {
                 method: 'PUT',
                 headers: {
                     'Content-type': "application/json"
@@ -62,11 +66,12 @@ export const editExpense = (merchant, price, curency, category, description, exp
 };
 
 export const deleteExpense = (expenseId) => {
+    const uid = localStorage.uid;
+
     return auth.currentUser.getIdToken(false)
-        .then((token) => {            
-            fetch(URL + `expenses/${expenseId}.json?auth=${token}`, {
-                method: 'DELETE',                
-                body: JSON.stringify(editExpense)
+        .then((token) => {
+            return fetch(URL + `expenses/${uid}/${expenseId}.json?auth=${token}`, {
+                method: 'DELETE'                
             });
         });
 };

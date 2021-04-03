@@ -14,11 +14,36 @@ class Expenses extends Component {
     }
 
     this.filterByCategory = this.filterByCategory.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
+  refresh() {
+    const uid = localStorage.uid;
+
+    fetch(URL + `expenses/${uid}.json`)
+      .then(res => res.json())
+      .then(res => {
+        let expensesArr = [];
+        for (const key in res) {
+          if (Object.hasOwnProperty.call(res, key)) {
+            res[key].id = key;
+            expensesArr.push(res[key]);
+          }
+        }
+        this.setState(() => ({
+          expenses: expensesArr,
+          expensesCopy: expensesArr,
+        }))
+
+      }
+      )
+      .catch(error => console.log(error));
+  }
 
   componentDidMount() {
-    fetch(URL + 'expenses.json')
+    const uid = localStorage.uid;
+
+    fetch(URL + `expenses/${uid}.json`)
       .then(res => res.json())
       .then(res => {
         let expensesArr = [];
@@ -71,7 +96,7 @@ class Expenses extends Component {
           <div>
             <h3>New expense</h3>
 
-            <NavLink to="/new-expense">Add</NavLink>
+            <NavLink to="/new-expense" >Add</NavLink>
           </div>
         </section>
 
@@ -120,7 +145,8 @@ class Expenses extends Component {
                 expense={x.expense}
                 price={x.price}
                 category={x.category}
-                description={x.description} />
+                description={x.description}
+                refresh={this.refresh}  />
             )}
           </tbody>
         </table>
