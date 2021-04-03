@@ -1,8 +1,10 @@
 import { register, activeUser } from './services/authService';
 
 
-const Register = () => {
-    
+const Register = ({
+    history
+}) => {
+
     const onRegister = (e) => {
         e.preventDefault();
         let email = e.target.elements.email.value;
@@ -10,6 +12,7 @@ const Register = () => {
 
         register(email, pass)
             .then(res => activeUser(res.user.uid, res.user.email))
+            .then(res => history.push('/expenses'))
             .catch(error => console.log(error));
     }
 

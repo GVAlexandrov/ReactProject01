@@ -1,14 +1,17 @@
 import { login, activeUser } from './services/authService';
 
 
-const Login = () => {
+const Login = ({
+  history
+}) => {
   const onLogin = (e) => {
     e.preventDefault();
     const email = e.target.elements.email.value;
     const pass = e.target.elements.pass.value;
 
     login(email, pass)
-      .then(res => activeUser(res.user.uid, res.user.email));
+      .then(res => activeUser(res.user.uid, res.user.email))
+      .then(res => history.push('/expenses'));
   }
 
 

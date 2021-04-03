@@ -4,7 +4,9 @@ import { URL } from '../../config/config';
 export function register(email, pass) {
     return auth.createUserWithEmailAndPassword(email, pass)
         .then(() => auth.signInWithEmailAndPassword(email, pass))
+        .catch((error) => console.log(error))
 }
+
 
 export function login(email, pass) {
     return auth.signInWithEmailAndPassword(email, pass);

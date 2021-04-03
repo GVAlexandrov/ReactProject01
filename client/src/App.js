@@ -12,22 +12,24 @@ import Profile from './Components/Profile';
 import Report from './Components/Report';
 import Error404 from './Components/404';
 import style from './App.module.css';
-import { useEffect, useState } from 'react';
 import { auth } from './config/firebaseInit';
+import { useEffect, useState } from 'react';
 
 
 function App() {
-  // const [userEmail, setUserEmail] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
 
-  // useEffect(() => {
-  //   auth = onAuthStateChange(setUserEmail);
-  // }, []);
+  useEffect(() => {
+    auth.onAuthStateChanged(setUserEmail);
+    if (userEmail) {
+      console.log(userEmail.uid);
+    }
+  }, []);
 
-  console.log(localStorage.email);
 
   return (
     <div className={style.App}>
-      <Header />
+      <Header userEmail={userEmail} setUserEmail={setUserEmail} />
 
 
       <Switch>
