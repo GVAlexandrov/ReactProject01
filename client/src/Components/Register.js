@@ -2,6 +2,7 @@ import { register, activeUser } from './services/authService';
 
 
 const Register = () => {
+    
     const onRegister = (e) => {
         e.preventDefault();
         let email = e.target.elements.email.value;

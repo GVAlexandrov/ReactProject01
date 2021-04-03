@@ -12,9 +12,19 @@ import Profile from './Components/Profile';
 import Report from './Components/Report';
 import Error404 from './Components/404';
 import style from './App.module.css';
+import { useEffect, useState } from 'react';
+import { auth } from './config/firebaseInit';
 
 
 function App() {
+  // const [userEmail, setUserEmail] = useState(null);
+
+  // useEffect(() => {
+  //   auth = onAuthStateChange(setUserEmail);
+  // }, []);
+
+  console.log(localStorage.email);
+
   return (
     <div className={style.App}>
       <Header />

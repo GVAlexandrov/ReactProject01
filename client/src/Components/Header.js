@@ -5,34 +5,55 @@ const Header = () => {
       <header>
          <nav>
 
+
             <ul>
+
+
                <li>
                   <NavLink id="home" className="left-floated" to="/">MoneySafe</NavLink>
                </li>
             </ul>
 
             <ul>
-               <li>
-                  <NavLink className="right-floated" to="/register">Register</NavLink>
-               </li>
+
+
+               {(localStorage.email === undefined)
+                  ? <li>
+                     <NavLink className="right-floated" to="/register">Register</NavLink>
+                  </li>
+                  : ''
+               }
+
+
+               {(localStorage.email === undefined)
+                  ? <li>
+                     <NavLink className="right-floated" to="/login">Login</NavLink>
+                  </li>
+                  : ''
+               }
+
 
                <li>
-                  <NavLink className="right-floated" to="/login">Login</NavLink>
+                  <NavLink className="right-floated" to="/profile">{localStorage.email}</NavLink>
                </li>
 
-               <li>
-                  <NavLink className="right-floated" to="/profile">[myusername profile]</NavLink>
-               </li>
 
-               <li>
-                  <NavLink className="right-floated" to="/expenses">My Expenses</NavLink>
-               </li>
+               {(localStorage.email !== undefined)
+                  ? <li>
+                     <NavLink className="right-floated" to="/expenses">My Expenses</NavLink>
+                  </li>
+                  : ''
+               }
 
-               <li>
-                  <NavLink className="right-floated" to="/">Logout</NavLink>
-               </li>
+
+               {(localStorage.email !== undefined)
+                  ? <li>
+                     <NavLink className="right-floated" to="/">Logout</NavLink>
+                  </li>
+                  : ''
+               }
             </ul>
-            
+
          </nav>
       </header>
    );
