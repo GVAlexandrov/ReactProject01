@@ -71,7 +71,54 @@ export const deleteExpense = (expenseId) => {
     return auth.currentUser.getIdToken(false)
         .then((token) => {
             return fetch(URL + `expenses/${uid}/${expenseId}.json?auth=${token}`, {
-                method: 'DELETE'                
+                method: 'DELETE'
             });
         });
 };
+
+export const refill = (refillAmount) => {
+    const uid = localStorage.uid;
+
+    let newRefillAmount = {
+        expense: refillAmount,
+    }
+
+    fetch(URL + `amount/${uid}.json`)
+        .then(res => res.json())
+        .then((res) => {
+            console.log(res);
+
+            if (res === null) {
+                return;
+            }
+
+            let keysArr = Object.keys(res);
+            let valuesArr = Object.values(res);
+
+            if (valuesArr.length > 0) {
+                console.log(valuesArr[0].expense);
+                let existingAmount = Number(valuesArr[0].expense)
+
+                newRefillAmount.expense += valuesArr[0].expense;
+            }
+
+        })
+        .catch(error => console.log(error))
+
+    return auth.currentUser.getIdToken(false)
+        .then((token) => {
+            fetch(URL + `amount/${uid}/.json?auth=${token}`, {
+                method: "POST",
+                body: JSON.stringify(newRefillAmount)
+            });
+        });
+};
+
+// export const getRefill = (expenseId) => {
+//     const uid = localStorage.uid;
+//     console.log(`${URL}expenses/${expenseId}.json`);
+
+//     return fetch(`${URL}expenses/${uid}/${expenseId}.json`)
+//         .then(res => res.json())
+//         .catch(error => console.log(error));
+// }

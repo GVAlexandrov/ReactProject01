@@ -35,7 +35,7 @@ const EditExpense = ({
         match.params.id)
       .then(res => console.log(res))
       .then(() => {
-        setTimeout(() => { history.push(`/expenses/${match.params.id}/details`) }, 100);
+        setTimeout(() => { history.push(`/expenses/${match.params.id}/details`) }, 200);
       })
   }
 

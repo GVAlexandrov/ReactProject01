@@ -21,9 +21,9 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged(setUserEmail);
-    if (userEmail) {
-      console.log(userEmail.uid);
-    }
+    // if (userEmail) {
+    //   console.log(userEmail.uid);
+    // }
   }, []);
 
 

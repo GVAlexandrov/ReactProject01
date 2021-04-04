@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { URL } from '../config/config';
 import ExistingExpense from './ExistingExpense';
+import * as refillService from './services/services';
 
 
 class Expenses extends Component {
@@ -15,6 +16,7 @@ class Expenses extends Component {
 
     this.filterByCategory = this.filterByCategory.bind(this);
     this.refresh = this.refresh.bind(this);
+    this.onRefillSubmitHandler = this.onRefillSubmitHandler.bind(this);
   }
 
   refresh() {
@@ -22,6 +24,7 @@ class Expenses extends Component {
 
     fetch(URL + `expenses/${uid}.json`)
       .then(res => res.json())
+      .then(res => console.log(res))
       .then(res => {
         let expensesArr = [];
         for (const key in res) {
@@ -78,16 +81,31 @@ class Expenses extends Component {
     this.setState((state) => ({ ...state, expensesCopy: filteredArray }));
   }
 
+  onRefillSubmitHandler(e) {
+    e.preventDefault();
+    const uid = localStorage.uid;
+
+    let { refillAmount } = e.target;
+    console.log(refillAmount.value);
+
+    refillService
+      .refill(
+        refillAmount.value,
+      )
+      .then(res => refillAmount.value = '')
+      .catch(error => console.log(error));
+  }
+
 
   render() {
     // console.log(this.state.expenses);
     return (
       <main>
         <section className="actions">
-          <form action="">
+          <form onSubmit={this.onRefillSubmitHandler}>
             <h3>Refill account amount.</h3>
 
-            <input type="text" id="refill-amount" />
+            <input type="text" name="refillAmount" id="refill-amount" />
 
             <button type="submit">Refill</button>
           </form>
@@ -146,7 +164,7 @@ class Expenses extends Component {
                 price={x.price}
                 category={x.category}
                 description={x.description}
-                refresh={this.refresh}  />
+                refresh={this.refresh} />
             )}
           </tbody>
         </table>

@@ -27,27 +27,21 @@ const ExistingExpense = ({
   return (
     <tr id={id}>
       <td>
-        <p>{expense}</p>
-        {/* <div className="report">
-                    <a href="#">Report</a>
-                </div> */}
+        <p>{expense}</p>        
       </td>
 
 
       <td>
-        {/* <img src="src/images/amount.png" alt="" /> */}
         <p>{price} лв</p>
       </td>
 
 
       <td>
-        {/* <img src="static/images/category.png" alt="" /> */}
         <p>{category}</p>
       </td>
 
 
       <td>
-        {/* <img src="./src/images/hastag.png" alt="" /> */}
         <p>{description}</p>
       </td>
 

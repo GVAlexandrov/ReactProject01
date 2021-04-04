@@ -8,6 +8,7 @@ const NewExpense = ({
     e.preventDefault();
 
     let { merchant, price, curency, category, description } = e.target;
+    // console.log(e.target);
 
     expenseService
       .addNewExpense(
@@ -29,9 +30,9 @@ const NewExpense = ({
 
 
         <div className="form-control">
-          <label htmlFor="merchant">Merchant*</label>
+          <label htmlFor="merchant">Expense*</label>
 
-          <input id="merchant" name="merchant" type="text" placeholder="Merchant" />
+          <input id="merchant" name="merchant" type="text" placeholder="Expense" />
         </div>
 
 
