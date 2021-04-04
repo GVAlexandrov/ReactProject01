@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Financial App
+
+The idea of the app is to be something like a expenses tracker.
+
 ## Available Scripts
 
 In the project directory, you can run:
