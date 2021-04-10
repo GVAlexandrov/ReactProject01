@@ -69,18 +69,18 @@ const EditExpense = ({
         <div className="form-control">
           <label htmlFor="category">Category*</label>
 
-          <select className="category" name="category" id="category">
+          <select className="category" name="category" id="category" value={expense.category}>
             <option value="all">All</option>
-            <option selected={expense.category === 'car'} value="car">Car</option>
-            <option selected={expense.category === 'clothes'} value="clothes">Clothes</option>
-            <option selected={expense.category === 'insurance'} value="insurance">Insurance</option>
-            <option selected={expense.category === 'maintenance'} value="maintenance">Maintenance</option>
-            <option selected={expense.category === 'food'} value="food">Food</option>
-            <option selected={expense.category === 'rent'} value="rent">Rent</option>
-            <option selected={expense.category === 'taxes'} value="taxes">Taxes</option>
-            <option selected={expense.category === 'travel'} value="travel">Travel</option>
-            <option selected={expense.category === 'utilities'} value="utilities">Utilities</option>
-            <option selected={expense.category === 'other'} value="other">Other</option>
+            <option value="car">Car</option>
+            <option value="clothes">Clothes</option>
+            <option value="insurance">Insurance</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="food">Food</option>
+            <option value="rent">Rent</option>
+            <option value="taxes">Taxes</option>
+            <option value="travel">Travel</option>
+            <option value="utilities">Utilities</option>
+            <option value="other">Other</option>
           </select>
         </div>
 

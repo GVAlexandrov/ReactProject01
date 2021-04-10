@@ -17,9 +17,12 @@ const NewExpense = ({
         curency.value,
         category.value,
         description.value)
-      .then(() => {
-        history.push('/expenses');
+      .then(resp => {
+        if (resp.statusText === "OK") {
+          history.push('/expenses');
+        }
       })
+      .catch(console.log);
   }
 
 
@@ -39,7 +42,7 @@ const NewExpense = ({
         <div className="form-control">
           <label htmlFor="total">Price*</label>
 
-          <input id="total" name="price" type="text" placeholder="52.00" />
+          <input id="total" name="price" type="number" placeholder="52.00" />
 
           <select className="vault" name="curency" id="vault">
             <option value="bgn">BGN</option>

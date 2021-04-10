@@ -9,7 +9,7 @@ import Expenses from './Components/Expenses';
 import ExpenseDetails from './Components/ExpenseDetails';
 import EditExpense from './Components/EditExpense';
 import Profile from './Components/Profile';
-import Report from './Components/Report';
+// import Report from './Components/Report';
 import Error404 from './Components/404';
 import style from './App.module.css';
 import { auth } from './config/firebaseInit';
@@ -41,7 +41,7 @@ function App() {
         <Route path='/expenses/:id/details' exact component={ExpenseDetails} />
         <Route path='/expenses/:id/details/edit' exact component={EditExpense} />
         <Route path='/profile' exact component={Profile} />
-        <Route path='/report' exact component={Report} />
+        {/* <Route path='/report' exact component={Report} /> */}
         <Route path='/*' exact component={Error404} />
       </Switch>
 

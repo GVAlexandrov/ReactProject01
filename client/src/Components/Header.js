@@ -53,6 +53,8 @@ const Header = ({
                         </li>
                         );
                      }
+
+                     return '';
                   })
                }
                {/* {(userEmail === null)

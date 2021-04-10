@@ -1,5 +1,4 @@
 import { auth } from '../../config/firebaseInit';
-import { URL } from '../../config/config';
 
 export function register(email, pass) {
     return auth.createUserWithEmailAndPassword(email, pass)

@@ -24,26 +24,27 @@ class Expenses extends Component {
 
     fetch(URL + `expenses/${uid}.json`)
       .then(res => res.json())
-      .then(res => console.log(res))
       .then(res => {
         let expensesArr = [];
+        
         for (const key in res) {
           if (Object.hasOwnProperty.call(res, key)) {
             res[key].id = key;
             expensesArr.push(res[key]);
           }
         }
+
         this.setState(() => ({
           expenses: expensesArr,
           expensesCopy: expensesArr,
         }))
 
-      }
-      )
+      })
       .catch(error => console.log(error));
   }
 
   componentDidMount() {
+    console.log("MOUNTED");
     const uid = localStorage.uid;
 
     fetch(URL + `expenses/${uid}.json`)
@@ -60,12 +61,9 @@ class Expenses extends Component {
           expenses: expensesArr,
           expensesCopy: expensesArr,
         }))
-
-      }
-      )
+      })
       .catch(error => console.log(error));
   }
-
 
   filterByCategory(e) {
     if (e.target.value === 'all') {
@@ -83,16 +81,12 @@ class Expenses extends Component {
 
   onRefillSubmitHandler(e) {
     e.preventDefault();
-    const uid = localStorage.uid;
 
     let { refillAmount } = e.target;
-    console.log(refillAmount.value);
+    // console.log(refillAmount.value);
 
-    refillService
-      .refill(
-        refillAmount.value,
-      )
-      .then(res => refillAmount.value = '')
+    refillService.refill(refillAmount.value)
+      .then(() => refillAmount.value = '')
       .catch(error => console.log(error));
   }
 
