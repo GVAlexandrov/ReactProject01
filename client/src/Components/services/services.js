@@ -30,7 +30,7 @@ export const addNewExpense = (merchant, price, curency, category, description) =
 
     return auth.currentUser.getIdToken(false)
         .then((token) => {
-            fetch(URL + `expenses/${uid}/.json?auth=${token}`, {
+            return fetch(URL + `expenses/${uid}/.json?auth=${token}`, {
                 method: "POST",
                 body: JSON.stringify(newExpense)
             });
@@ -79,46 +79,75 @@ export const deleteExpense = (expenseId) => {
 export const refill = (refillAmount) => {
     const uid = localStorage.uid;
 
+    if (!uid) return;
+
     let newRefillAmount = {
-        expense: refillAmount,
+        balance: Number(refillAmount),
     }
 
-    fetch(URL + `amount/${uid}.json`)
+    return fetch(URL + `amount/${uid}.json`)
         .then(res => res.json())
         .then((res) => {
             console.log(res);
+            console.log('UID: ', uid);
 
-            if (res === null) {
+            if (!res) {
+                // method = 'POST';
                 return;
             }
 
-            let keysArr = Object.keys(res);
-            let valuesArr = Object.values(res);
+            // let keysArr = Object.keys(res);
+            // let valuesArr = Object.values(res);
 
-            if (valuesArr.length > 0) {
-                console.log(valuesArr[0].expense);
-                let existingAmount = Number(valuesArr[0].expense)
+            if (res.balance) {
+                // console.log(valuesArr[0].balance);
+                // let existingAmount = Number(valuesArr[0].balance)
 
-                newRefillAmount.expense += valuesArr[0].expense;
+                newRefillAmount.balance += Number(res.balance);
             }
-
         })
-        .catch(error => console.log(error))
-
-    return auth.currentUser.getIdToken(false)
+        .then(() => {
+            return auth.currentUser.getIdToken(false)
+        })
         .then((token) => {
-            fetch(URL + `amount/${uid}/.json?auth=${token}`, {
-                method: "POST",
+            return fetch(URL + `amount/${uid}.json?auth=${token}`, {
+                method: 'PUT',
                 body: JSON.stringify(newRefillAmount)
             });
-        });
+        })
+        .catch(error => console.log(error));
 };
 
-// export const getRefill = (expenseId) => {
-//     const uid = localStorage.uid;
-//     console.log(`${URL}expenses/${expenseId}.json`);
+export const getTotalAmount = () => {
+    const uid = localStorage.uid;
+    console.log(`${URL}amount/${uid}.json`);
 
-//     return fetch(`${URL}expenses/${uid}/${expenseId}.json`)
-//         .then(res => res.json())
-//         .catch(error => console.log(error));
-// }
+    return fetch(`${URL}amount/${uid}.json`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            return data.balance;
+        })
+        .catch(error => console.log(error));
+}
+
+export const getAllExpenses = () => {
+    const uid = localStorage.uid;
+    console.log(`${URL}expenses/${uid}.json`);
+
+    return fetch(`${URL}expenses/${uid}.json`)
+        .then(res => res.json())
+        .then(data => {
+            let amount = 0;
+
+            for (const key in data) {
+                if (Object.hasOwnProperty.call(data, key)) {
+                    console.log(data[key]);
+                    amount += Number(data[key].price);
+                }
+            }
+
+            return amount;
+        })
+        .catch(error => console.log(error));
+}
