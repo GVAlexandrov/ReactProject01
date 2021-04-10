@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import * as expenseService from './services/services';
+import validate from '../validations/expensesValidations';
+
 
 const EditExpense = ({
   match,
   history
 }) => {
   let [expense, setExpense] = useState({});
+  let [merchantError, setMerchantError] = useState("");
+  let [priceError, setPriceError] = useState("");
 
 
   useEffect(() => {
@@ -16,13 +20,29 @@ const EditExpense = ({
   }, [match.params.id]);
 
 
-  console.log(expense.category);
-
-
   let onEditSubmit = (e) => {
     e.preventDefault();
 
     let { merchant, price, curency, category, description } = e.target;
+
+    const merchantError = validate.merchant(merchant.value);
+    const priceError = validate.price(price.value);
+
+    if (merchantError) {
+      setMerchantError(merchantError);
+      setTimeout(() => {
+        setMerchantError('');
+      }, 1500);
+    }
+
+    if (priceError) {
+      setPriceError(priceError);
+      setTimeout(() => {
+        setPriceError('');
+      }, 1500);
+    }
+
+    if (merchantError || priceError) return;
 
     // console.log(e.target);
     expenseService
@@ -33,7 +53,7 @@ const EditExpense = ({
         category.value,
         description.value,
         match.params.id)
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .then(() => {
         setTimeout(() => { history.push(`/expenses/${match.params.id}/details`) }, 200);
       })
@@ -52,11 +72,19 @@ const EditExpense = ({
           <input id="merchant" name="merchant" type="text" defaultValue={expense.expense} />
         </div>
 
+        {merchantError
+          ? (
+            <div className="notifications" >
+              <p className="notification-message">{merchantError}</p>
+            </div>
+          )
+          : (<></>)
+        }
 
         <div className="form-control">
           <label htmlFor="total">Total*</label>
 
-          <input id="total" name="price" type="text" defaultValue={expense.price} />
+          <input id="total" name="price" type="number" defaultValue={expense.price} />
 
           <select className="vault" name="curency" id="vault">
             <option value="bgn">BGN</option>
@@ -65,6 +93,14 @@ const EditExpense = ({
           </select>
         </div>
 
+        {priceError
+          ? (
+            <div className="notifications" >
+              <p className="notification-message">{priceError}</p>
+            </div>
+          )
+          : (<></>)
+        }
 
         <div className="form-control">
           <label htmlFor="category">Category*</label>

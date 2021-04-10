@@ -44,7 +44,7 @@ class Expenses extends Component {
   }
 
   componentDidMount() {
-    console.log("MOUNTED");
+    // console.log("MOUNTED");
     const uid = localStorage.uid;
 
     fetch(URL + `expenses/${uid}.json`)

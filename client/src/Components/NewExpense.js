@@ -1,14 +1,36 @@
+import { useEffect, useState } from 'react';
 import * as expenseService from './services/services';
+import validate from '../validations/expensesValidations';
 
 
 const NewExpense = ({
   history,
 }) => {
+  let [merchantError, setMerchantError] = useState("");
+  let [priceError, setPriceError] = useState("");
+
   let onNewExpenseSubmitHandler = (e) => {
     e.preventDefault();
 
     let { merchant, price, curency, category, description } = e.target;
-    // console.log(e.target);
+    const merchantError = validate.merchant(merchant.value);
+    const priceError = validate.price(price.value);
+
+    if (merchantError) {
+      setMerchantError(merchantError);
+      setTimeout(() => {
+        setMerchantError('');
+      }, 1500);
+    }
+
+    if (priceError) {
+      setPriceError(priceError);
+      setTimeout(() => {
+        setPriceError('');
+      }, 1500);
+    }
+
+    if (merchantError || priceError) return;
 
     expenseService
       .addNewExpense(
@@ -38,6 +60,15 @@ const NewExpense = ({
           <input id="merchant" name="merchant" type="text" placeholder="Expense" />
         </div>
 
+        {merchantError
+          ? (
+            <div className="notifications" >
+              <p className="notification-message">{merchantError}</p>
+            </div>
+          )
+          : (<></>)
+        }
+
 
         <div className="form-control">
           <label htmlFor="total">Price*</label>
@@ -50,6 +81,14 @@ const NewExpense = ({
           </select>
         </div>
 
+        {priceError
+          ? (
+            <div className="notifications" >
+              <p className="notification-message">{priceError}</p>
+            </div>
+          )
+          : (<></>)
+        }
 
         <div className="form-control">
           <label htmlFor="category">Category*</label>
