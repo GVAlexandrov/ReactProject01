@@ -7,7 +7,7 @@ import { auth } from '../../config/firebaseInit';
 
 export const getOne = (expenseId) => {
     const uid = localStorage.uid;
-    console.log(`${URL}expenses/${expenseId}.json`);
+    // console.log(`${URL}expenses/${expenseId}.json`);
 
     return fetch(`${URL}expenses/${uid}/${expenseId}.json`)
         .then(res => res.json())
@@ -52,8 +52,8 @@ export const editExpense = (merchant, price, curency, category, description, exp
 
     return auth.currentUser.getIdToken(false)
         .then((token) => {
-            console.log(URL + `expenses/${uid}/${expenseId}.json?auth=${token}`);
-            console.log(editExpense);
+            // console.log(URL + `expenses/${uid}/${expenseId}.json?auth=${token}`);
+            // console.log(editExpense);
 
             fetch(URL + `expenses/${uid}/${expenseId}.json?auth=${token}`, {
                 method: 'PUT',
@@ -88,8 +88,8 @@ export const refill = (refillAmount) => {
     return fetch(URL + `amount/${uid}.json`)
         .then(res => res.json())
         .then((res) => {
-            console.log(res);
-            console.log('UID: ', uid);
+            // console.log(res);
+            // console.log('UID: ', uid);
 
             if (!res) {
                 // method = 'POST';
@@ -120,12 +120,12 @@ export const refill = (refillAmount) => {
 
 export const getTotalAmount = () => {
     const uid = localStorage.uid;
-    console.log(`${URL}amount/${uid}.json`);
+    // console.log(`${URL}amount/${uid}.json`);
 
     return fetch(`${URL}amount/${uid}.json`)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             return data.balance;
         })
         .catch(error => console.log(error));
@@ -133,7 +133,7 @@ export const getTotalAmount = () => {
 
 export const getAllExpenses = () => {
     const uid = localStorage.uid;
-    console.log(`${URL}expenses/${uid}.json`);
+    // console.log(`${URL}expenses/${uid}.json`);
 
     return fetch(`${URL}expenses/${uid}.json`)
         .then(res => res.json())
@@ -142,7 +142,7 @@ export const getAllExpenses = () => {
 
             for (const key in data) {
                 if (Object.hasOwnProperty.call(data, key)) {
-                    console.log(data[key]);
+                    // console.log(data[key]);
                     amount += Number(data[key].price);
                 }
             }

@@ -99,7 +99,7 @@ class Expenses extends Component {
           <form onSubmit={this.onRefillSubmitHandler}>
             <h3>Refill account amount.</h3>
 
-            <input type="text" name="refillAmount" id="refill-amount" />
+            <input type="number" name="refillAmount" id="refill-amount" />
 
             <button type="submit">Refill</button>
           </form>
