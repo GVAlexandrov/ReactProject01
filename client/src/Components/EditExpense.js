@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as expenseService from './services/services';
 import validate from '../validations/expensesValidations';
+import style from './EditExpense.css';
 
 
 const EditExpense = ({
